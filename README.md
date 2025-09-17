@@ -1,4 +1,4 @@
-Um projeto de exemplo em React + TypeScript com configuração completa de ESLint, Prettier e Husky para manter o código limpo e padronizado.
+Um projeto de exemplo em React com configuração completa de ESLint, Prettier e Husky para manter o código limpo e padronizado.
 
 1- Instalar Eslint
 npm init @eslint/config@latest
