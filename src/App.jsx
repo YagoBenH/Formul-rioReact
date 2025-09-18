@@ -4,16 +4,41 @@ import { FiSend } from 'react-icons/fi';
 import { UserForm } from './Components/UserForm';
 import { PreviewForm } from './Components/PreviewForm';
 import { Thanks } from './Components/Thanks';
+import Steps from './Components/Steps';
 
 import { useForm } from './Hooks/userForm';
+import { useState } from 'react';
 
 import './App.css';
 
+const formTemplate = {
+    name: '',
+    email: '',
+    preview: '',
+    comment: '',
+};
+
 function App() {
+    const [data, setData] = useState(formTemplate);
+
+    const updateFieldHandler = (key, value) => {
+        setData((prev) => {
+            return { ...prev, [key]: value };
+        });
+    };
+
     const formComponents = [
-        <UserForm key="userForm" />,
-        <PreviewForm key="previewForm" />,
-        <Thanks key="thanks" />,
+        <UserForm
+            data={data}
+            updateFieldHandler={updateFieldHandler}
+            key="userForm"
+        />,
+        <PreviewForm
+            data={data}
+            updateFieldHandler={updateFieldHandler}
+            key="previewForm"
+        />,
+        <Thanks data={data} key="thanks" />,
     ];
 
     const {
@@ -34,7 +59,7 @@ function App() {
                 </p>
             </div>
             <div className="form-container">
-                <p>Etapas</p>
+                <Steps currentStep={currentStep} />
                 <form onSubmit={(e) => changeStep(currentStep + 1, e)}>
                     <div className="inputs-container">{currentComponent}</div>
                     <div className="actions">
